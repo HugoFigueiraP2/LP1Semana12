@@ -6,6 +6,18 @@ namespace Palindrome
     {
         static void Main(string[] args)
         {
+            foreach (var arg in args)
+            {
+                try
+                {
+                    bool IsPalindromeInside = Logic_Palindrome(arg);
+                    Console.WriteLine($"{arg} -> {IsPalindromeInside}");
+                }
+                catch (ArgumentException ex)
+                {
+                    Console.WriteLine($"{arg} -> Exception: {ex.Message}");
+                }
+            }
             
         }
 
@@ -13,16 +25,15 @@ namespace Palindrome
         {
             if (word == null)
             {
-                throw new ArgumentNullException("String cannot be null");
+                throw new ArgumentNullException(nameof(word),"String cannot be null");
             }
 
             if (word.Length < 2)
             {
                 return true;
-
             }
 
-            return Logic_Palindrome(word);
+            return IsPalindromeInside(word);
 
             bool IsPalindromeInside(string str)
             {
@@ -36,15 +47,13 @@ namespace Palindrome
                         return false;
                     }
                     left++;
-                    right++;
+                    right--;
                 }
                 return true;
 
             }
 
         }
-
-
 
     }
 }
